@@ -142,8 +142,7 @@ void checkMoveIntCapacity(int var1, char* var2) {
     if (isVarDeclared(var2)) {
         // Check the variable can hold the integer
         if (getIntegerLength(var1) > vars[i].capacity) {
-            printf("Error: Variable %s has insufficient capacity for this operation. lineno - (%d)\n", var2, yylineno);
-            isValidProgram = false;
+            printf("Warning: Variable %s may have insufficient capacity for this operation. lineno - (%d)\n", var2, yylineno);
         }
     } else {
         printf("Error: Variable %s is not declared. lineno - (%d)\n", var2, yylineno);
