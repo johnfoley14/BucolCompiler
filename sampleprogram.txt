@@ -1,4 +1,4 @@
-// Program to copy and paste in
+// Erronous program to copy and paste in
 
 BEGINING.
 XXXX Y.
@@ -28,7 +28,9 @@ ADD 95 TO Z.
 
 END.
 
--- Program and corresponding errors
+-- Program and corresponding errors for parser.y 
+-- Null value errors will not be checked by parser2.y
+-- Capacity erros are replaced by warnings in parser2.y
 
 BEGINING.
 XXXX Y.
@@ -58,7 +60,7 @@ ADD 95 TO Z.        -- New value would exceed capacity
 
 END.
 
--- Actual error warnings
+-- Actual error warnings for parser.y
 
 Error: Variable A is not declared.
 Error: Variable Z has insufficient capacity for this operation.
@@ -92,19 +94,5 @@ ADD 200 TO Y.
 ADD Z TO Y.
 
 END.
-
--- Assumptions of language
-In my interpretation of the language I made the following assumptions:
-
-That when moving a variable to a varible, you were moving the variable value.
-This meant even if the capacity of a variable was bigger than the other as long
-as its value fitter the capacity it will not result in an error.
-
-When moving a variable, the variable being moved should have a value.
-If the variable has a null value, an error will arise.
-
-When adding two variables, neither may have a null value.
-This includes adding an integer to a variable, the variable value must be 
-already defined at this point.
 
 
