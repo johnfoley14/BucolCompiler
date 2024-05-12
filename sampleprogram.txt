@@ -1,0 +1,110 @@
+// Program to copy and paste in
+
+BEGINING.
+XXXX Y.
+XX Z.
+XX P.
+
+BODY.
+
+MOVE 10 TO A.
+MOVE 200 TO Z.
+
+MOVE Y TO A.
+MOVE A TO Y.
+MOVE Z TO P.
+MOVE 500 TO Y.
+MOVE Y TO Z.
+
+ADD 10 TO A.
+ADD 50 TO Z.
+MOVE 10 TO Z.
+ADD 100 TO Z.
+
+ADD A TO Z.
+ADD Z TO A.
+ADD Z TO P.
+ADD 95 TO Z.
+
+END.
+
+-- Program and corresponding errors
+
+BEGINING.
+XXXX Y.
+XX Z.
+XX P.
+
+BODY.
+
+MOVE 10 TO A.       -- A not declared
+MOVE 200 TO Z.      -- Z insufficient capacity
+
+MOVE Y TO A.        -- A not declared
+MOVE A TO Y.        -- A not declared
+MOVE Z TO P.        -- Z has no value to move
+MOVE 500 TO Y.        
+MOVE Y TO Z.        -- Z doesnt have capacity to hold Y value
+
+ADD 10 TO A.        -- A doesnt exist
+ADD 50 TO Z.        -- Z doesn't have value to add to
+MOVE 10 TO Z.
+ADD 100 TO Z.       -- New value would exceed capacity
+
+ADD A TO Z.         -- A not declared
+ADD Z TO A.         -- A not declared
+ADD Z TO P.         -- P doesn't have value to add to
+ADD 95 TO Z.        -- New value would exceed capacity
+
+END.
+
+-- Actual error warnings
+
+Error: Variable A is not declared.
+Error: Variable Z has insufficient capacity for this operation.
+Error: Variable Y or A is not declared.
+Error: Variable A or Y is not declared.
+Error: Variable Z has no initial value. Cannot move a null value.
+Error: Variable Z has insufficient capacity for this operation.
+Error: Variable A is not declared.
+Error: Variable Z has no inital value. Cannot add to a null value.
+Error: Variable Z has insufficient capacity for this operation.
+Error: Variable A or Z is not declared.
+Error: Variable Z or A is not declared.
+Error: Variable Z or P has no inital value. Cannot add to a null value.
+Error: Variable Z has insufficient capacity for this operation.
+
+-- Example Valid Program
+
+BEGINING.
+XXXX Y.
+XX Z.
+XX P.
+
+BODY.
+
+MOVE 10 TO Y.
+MOVE Y TO Z.
+MOVE 200 TO Y.
+
+ADD 10 TO Z.
+ADD 200 TO Y.
+ADD Z TO Y.
+
+END.
+
+-- Assumptions of language
+In my interpretation of the language I made the following assumptions:
+
+That when moving a variable to a varible, you were moving the variable value.
+This meant even if the capacity of a variable was bigger than the other as long
+as its value fitter the capacity it will not result in an error.
+
+When moving a variable, the variable being moved should have a value.
+If the variable has a null value, an error will arise.
+
+When adding two variables, neither may have a null value.
+This includes adding an integer to a variable, the variable value must be 
+already defined at this point.
+
+

@@ -421,7 +421,7 @@ char *yytext;
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
-#include "parser.tab.h"
+#include "parser2.tab.h"
 
 /* rules for the lexer */
 #line 428 "lex.yy.c"

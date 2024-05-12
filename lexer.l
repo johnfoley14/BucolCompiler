@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
-#include "parser.tab.h"
+#include "parser2.tab.h"
 
 %}
 

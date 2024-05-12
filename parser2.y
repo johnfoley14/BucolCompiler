@@ -144,8 +144,6 @@ void checkMoveIntCapacity(int var1, char* var2) {
         if (getIntegerLength(var1) > vars[i].capacity) {
             printf("Error: Variable %s has insufficient capacity for this operation. lineno - (%d)\n", var2, yylineno);
             isValidProgram = false;
-        } else {
-            vars[i].variable_value = var1;
         }
     } else {
         printf("Error: Variable %s is not declared. lineno - (%d)\n", var2, yylineno);
@@ -159,16 +157,8 @@ void checkMoveVarCapacity(char* varMovedFrom, char* varMovedInto) {
     if(isVarDeclared(varMovedFrom) && isVarDeclared(varMovedInto)){
         int i = getVarIndex(varMovedFrom);
         int j = getVarIndex(varMovedInto);
-        if(vars[i].variable_value) {
-            if (getIntegerLength(vars[i].variable_value) > vars[j].capacity) {
-                printf("Error: Variable %s has insufficient capacity for this operation. lineno - (%d)\n", varMovedInto, yylineno);
-                isValidProgram = false;
-            } else {
-                vars[j].variable_value = vars[i].variable_value;
-            }
-        } else {
-            printf("Error: Variable %s has no initial value. Cannot move a null value. lineno - (%d)\n", varMovedFrom, yylineno);
-            isValidProgram = false;
+        if (vars[i].capacity > vars[j].capacity) {
+            printf("Warning: Variable %s may have insufficient capacity for this operation. lineno - (%d)\n", varMovedInto, yylineno);
         }
     } else {
         isValidProgram = false;
@@ -180,16 +170,10 @@ void checkMoveVarCapacity(char* varMovedFrom, char* varMovedInto) {
 void checkAddIntCapacity(int var1, char* var2) {
     int i = getVarIndex(var2);
     if (isVarDeclared(var2)) {
-        if (vars[i].variable_value) {
-            if (getIntegerLength(vars[i].variable_value + var1) > vars[i].capacity) {
-                isValidProgram = false;
-                printf("Error: Variable %s has insufficient capacity for this operation. lineno - (%d)\n", var2, yylineno);
-            } else {
-                vars[i].variable_value += var1;
-            }
-        } else {
-            isValidProgram = false;
-            printf("Error: Variable %s has no inital value. Cannot add to a null value. lineno - (%d)\n", var2, yylineno);
+        if ( getIntegerLength(var1) > vars[i].capacity) {
+            // var1 can be 1000 and var2 capacity can be 3 and still work
+            // if current value of var2 is -500
+            printf("Warning: Variable %s may have insufficient capacity for this operation. lineno - (%d)\n", var2, yylineno);
         }
     } else {
         isValidProgram = false;
@@ -202,16 +186,8 @@ void checkAddVarCapacity(char* var1, char* var2) {
     int i = getVarIndex(var1);
     int j = getVarIndex(var2);
     if(isVarDeclared(var1) && isVarDeclared(var2)) {
-        if (vars[i].variable_value && vars[j].variable_value) {
-            if (getIntegerLength(vars[i].variable_value + vars[j].variable_value) > vars[j].capacity) {
-                isValidProgram = false;
-                printf("Error: Variable %s has insufficient capacity for this operation. lineno - (%d)\n", var2, yylineno);
-            } else {
-                vars[j].variable_value += vars[i].variable_value;
-            }
-        } else {
-            isValidProgram = false;
-            printf("Error: Variable %s or %s has no inital value. Cannot add to a null value. lineno - (%d)\n", var1, var2, yylineno);
+        if (vars[i].capacity > vars[j].capacity) {
+            printf("Warning: Variable %s may have insufficient capacity for this operation. lineno - (%d)\n", var2, yylineno);
         }
     } else {
         isValidProgram = false;
